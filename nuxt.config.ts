@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     srcDir: 'src/',
     devtools: { enabled: true },
     devServer: {
-        port: 3001,
         https: {
             key: 'dev-ops/localhost-key.pem',
             cert: 'dev-ops/localhost.pem',
@@ -61,4 +60,4 @@ export default defineNuxtConfig({
             },
         },
     },
-});
+})

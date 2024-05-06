@@ -1,58 +1,58 @@
 <script setup lang="ts">
-import { useEventBus } from '@vueuse/core';
-import type { AppLink } from '~/types';
-import type { Ref } from '#imports';
+import { useEventBus } from '@vueuse/core'
+import type { AppLink } from '~/types'
+import type { Ref } from '#imports'
 
 const props = defineProps<{
-    link: AppLink;
-}>();
+    link: AppLink
+}>()
 
-const isOpen = inject<Ref<boolean>>('isOpen');
-const isSticky = inject<Ref<boolean>>('isSticky');
-const closeAll = inject<() => void>('closeAll');
-const isChildrenOpen = inject<Ref<boolean>>('isChildrenOpen');
+const isOpen = inject<Ref<boolean>>('isOpen')
+const isSticky = inject<Ref<boolean>>('isSticky')
+const closeAll = inject<() => void>('closeAll')
+const isChildrenOpen = inject<Ref<boolean>>('isChildrenOpen')
 
-const hasChildren = computed(() => !!props.link.children?.length);
+const hasChildren = computed(() => !!props.link.children?.length)
 
-const { on: onItemOpen, emit: openItem } = useEventBus<string>('open-item');
-const { on: onItemClose, emit: closeItem } = useEventBus<string>('close-item');
+const { on: onItemOpen, emit: openItem } = useEventBus<string>('open-item')
+const { on: onItemClose, emit: closeItem } = useEventBus<string>('close-item')
 
 onItemOpen((slug) => {
     if (slug === props.link.slug && isChildrenOpen && !isChildrenOpen?.value) {
-        isChildrenOpen.value = true;
+        isChildrenOpen.value = true
     }
     else {
-        closeItem(props.link.slug);
+        closeItem(props.link.slug)
     }
-});
+})
 
 onItemClose((slug) => {
     if (isChildrenOpen && (!slug || slug === props.link.slug)) {
-        isChildrenOpen.value = false;
+        isChildrenOpen.value = false
     }
-});
+})
 
 const open = () => {
     if (!hasChildren.value || !isOpen) {
-        if (closeAll) closeAll();
+        if (closeAll) closeAll()
 
-        return;
+        return
     }
 
-    isOpen.value = true;
-    openItem(props.link.slug);
-};
+    isOpen.value = true
+    openItem(props.link.slug)
+}
 
 const close = () => {
     if (!hasChildren.value || !isOpen) {
-        if (closeAll) closeAll();
+        if (closeAll) closeAll()
 
-        return;
+        return
     }
 
-    isOpen.value = false;
-    closeItem(props.link.slug);
-};
+    isOpen.value = false
+    closeItem(props.link.slug)
+}
 </script>
 
 <template>

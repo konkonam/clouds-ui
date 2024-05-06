@@ -5,100 +5,100 @@ import {
     useScrollLock,
     useEventBus,
     useElementHover,
-} from '@vueuse/core';
+} from '@vueuse/core'
 
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
-const isOpen = ref<boolean>(false);
-const isSticky = ref<boolean>();
-const isCollapsed = ref<boolean>(false);
-const self = ref<HTMLElement>();
-const mobileWrapperOuter = ref<HTMLElement>();
-const mobileWrapper = ref<HTMLElement>();
+const isOpen = ref<boolean>(false)
+const isSticky = ref<boolean>()
+const isCollapsed = ref<boolean>(false)
+const self = ref<HTMLElement>()
+const mobileWrapperOuter = ref<HTMLElement>()
+const mobileWrapper = ref<HTMLElement>()
 
-const { y: windowScrollY } = useWindowScroll();
-const bounding = useElementBounding(self);
-const hovered = useElementHover(self);
-const { fetchLinks } = useCms();
+const { y: windowScrollY } = useWindowScroll()
+const bounding = useElementBounding(self)
+const hovered = useElementHover(self)
+const { fetchLinks } = useCms()
 
-const isFirstOpen = ref<boolean>(true);
-const lastOpenIndex = ref<number>(-1);
-const direction = ref<'left' | 'right' | undefined>();
-const links = await fetchLinks();
+const isFirstOpen = ref<boolean>(true)
+const lastOpenIndex = ref<number>(-1)
+const direction = ref<'left' | 'right' | undefined>()
+const links = await fetchLinks()
 
-const activeItem = ref<number>(0);
-const lastItem = links.length - 1;
+const activeItem = ref<number>(0)
+const lastItem = links.length - 1
 
-const { emit: closeItem } = useEventBus<string>('close-item');
+const { emit: closeItem } = useEventBus<string>('close-item')
 
 if (bounding.y.value >= 40) {
-    isSticky.value = !(bounding.y.value > 40);
+    isSticky.value = !(bounding.y.value > 40)
 }
 
 const closeAll = () => {
-    isOpen.value = false;
-    closeItem('');
-};
+    isOpen.value = false
+    closeItem('')
+}
 
 onMounted(() => {
-    const isLocked = useScrollLock(window);
+    const isLocked = useScrollLock(window)
 
     watch(isOpen, (value) => {
-        if (!value) direction.value = undefined;
-        if (!value) isFirstOpen.value = true;
-        if (!self.value) return;
-        if (!isSticky.value) isLocked.value = value;
+        if (!value) direction.value = undefined
+        if (!value) isFirstOpen.value = true
+        if (!self.value) return
+        if (!isSticky.value) isLocked.value = value
 
         if (value) {
-            bounding.update();
-            self.value.style.transform = `translateY(-${bounding.y.value - 40}px)`;
+            bounding.update()
+            self.value.style.transform = `translateY(-${bounding.y.value - 40}px)`
         }
         else {
-            self.value.style.transform = '';
+            self.value.style.transform = ''
         }
-    });
+    })
 
     watch(isSticky, (value) => {
-        console.log('sticky: ', value);
-    });
+        console.log('sticky: ', value)
+    })
 
     watch(hovered, (value) => {
         if (isSticky.value && !value) {
-            closeItem('');
-            isOpen.value = false;
+            closeItem('')
+            isOpen.value = false
         }
-    });
+    })
 
     watch(isCollapsed, (value, nv) => {
-        if (!self.value) return;
+        if (!self.value) return
 
         if (nv) {
-            self.value.style.width = (mobileWrapperOuter.value?.clientWidth ?? 0) + 'px';
+            self.value.style.width = (mobileWrapperOuter.value?.clientWidth ?? 0) + 'px'
         }
         else {
-            self.value.style.width = '';
+            self.value.style.width = ''
         }
-    });
+    })
 
     watch(windowScrollY, () => {
-        isSticky.value = !(bounding.y.value > 40);
+        isSticky.value = !(bounding.y.value > 40)
 
-        if (!isSticky.value && isOpen.value) closeAll();
-    }, { immediate: true });
+        if (!isSticky.value && isOpen.value) closeAll()
+    }, { immediate: true })
 
     watch(bounding.y, (v, nv) => {
-        isSticky.value = !(nv ?? 41 > 40) && !self.value?.style.transform;
-    });
-});
+        isSticky.value = !(nv ?? 41 > 40) && !self.value?.style.transform
+    })
+})
 
-provide('isOpen', isOpen);
-provide('isSticky', isSticky);
-provide('closeAll', closeAll);
-provide('activeItem', activeItem);
-provide('lastItem', lastItem);
-provide('isFirstOpen', isFirstOpen);
-provide('lastOpenIndex', lastOpenIndex);
-provide('direction', direction);
+provide('isOpen', isOpen)
+provide('isSticky', isSticky)
+provide('closeAll', closeAll)
+provide('activeItem', activeItem)
+provide('lastItem', lastItem)
+provide('isFirstOpen', isFirstOpen)
+provide('lastOpenIndex', lastOpenIndex)
+provide('direction', direction)
 </script>
 
 <template>
@@ -108,8 +108,7 @@ provide('direction', direction);
             'sticky',
             'z-50',
             'top-10',
-            'mt-10',
-            'mb-4',
+            'my-10',
             'p-1',
             'self-end md:self-center',
             'rounded-xl',

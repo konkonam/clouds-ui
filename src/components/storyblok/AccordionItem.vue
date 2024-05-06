@@ -3,12 +3,12 @@ import {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
-} from '@headlessui/vue';
-import type { AccordionItemStoryblok } from '~/types';
+} from '@headlessui/vue'
+import type { AccordionItemStoryblok } from '~/types'
 
 const props = defineProps<{
-    blok: AccordionItemStoryblok;
-}>();
+    blok: AccordionItemStoryblok
+}>()
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const props = defineProps<{
         <DisclosureButton
             class="group flex w-full mb-2 justify-between rounded-lg bg-zinc-800 p-1 text-left text-sm font-medium text-white focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75 transition-all"
         >
-            <span class="block w-full group-hover:bg-white group-hover:text-zinc-800 px-8 py-2 rounded-lg transition-all">
+            <span class="w-full group-hover:bg-white group-hover:text-zinc-800 px-8 py-1.5 rounded-lg transition-all">
                 {{ props.blok.title }}
             </span>
         </DisclosureButton>

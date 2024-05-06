@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import { useComponent } from "~/utils/useComponent";
+import { useWindowScroll } from '@vueuse/core'
+import { useComponent } from '~/utils/useComponent'
 
 definePageMeta({
-	alias: [
-		'/pages/:slug(.*)*',
-	],
-});
-const { fetchSingle } = useCms();
+    alias: [
+        '/pages/:slug(.*)*',
+    ],
+})
+const { fetchSingle } = useCms()
 
-const story = await fetchSingle();
+const story = await fetchSingle()
+const windowScroll = useWindowScroll()
+
+provide('windowScroll', windowScroll)
 </script>
 
 <template>
-	<component v-if="story?.content" :is="useComponent(story.content)" />
+    <component
+        :is="useComponent(story.content)"
+        v-if="story?.content"
+    />
 </template>

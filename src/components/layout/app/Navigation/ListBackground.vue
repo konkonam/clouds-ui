@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useEventBus } from '@vueuse/core';
-import type { Ref } from '#imports';
+import { useEventBus } from '@vueuse/core'
+import type { Ref } from '#imports'
 
-const self = ref<HTMLElement>();
-const duration = ref<number>(300);
-const isOpen = inject<Ref<boolean>>('isOpen');
-const isFirstOpen = inject<Ref<boolean>>('isFirstOpen');
-const { on: onUpdateHeight } = useEventBus<number>('update-height');
+const self = ref<HTMLElement>()
+const duration = ref<number>(300)
+const isOpen = inject<Ref<boolean>>('isOpen')
+const isFirstOpen = inject<Ref<boolean>>('isFirstOpen')
+const { on: onUpdateHeight } = useEventBus<number>('update-height')
 
 onUpdateHeight((height) => {
-    if (!self.value) return;
+    if (!self.value) return
 
-    const currentHeight = self.value.clientHeight;
-    if (height > currentHeight) duration.value = 200;
-    else duration.value = 500;
+    const currentHeight = self.value.clientHeight
+    if (height > currentHeight) duration.value = 200
+    else duration.value = 500
 
-    self.value.style.height = height + 'px';
-});
+    self.value.style.height = height + 'px'
+})
 </script>
 
 <template>
