@@ -2,8 +2,8 @@
   "name": "cms-base",
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "bun run sb:generate &&nuxt dev",
+    "build": "bun run sb:generate && nuxt build",
+    "dev": "bun run sb:generate && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -25,7 +25,8 @@
     "@pinia/nuxt": "^0.5.1",
     "@storyblok/vue": "^8.0.8",
     "eslint": "^9.2.0",
-    "nuxt": "^3.11.2"
+    "nuxt": "^3.11.2",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@iconify/types": "^2.0.0",
