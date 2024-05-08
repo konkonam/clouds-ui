@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { SectionStoryblok } from '~/types';
+import type { SectionStoryblok } from '~/types'
 
 const props = defineProps<{
-    sections: SectionStoryblok[];
-    isRecursive?: boolean;
-}>();
+    sections: SectionStoryblok[]
+    isRecursive?: boolean
+}>()
 
-const { filter, elements } = useSections();
+const { filter, elements } = useSections()
 
-const isVisible = computed(() => (id: string) => elements[id]);
+const isVisible = computed(() => (id: string) => elements[id])
 </script>
 
 <template>

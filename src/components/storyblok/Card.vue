@@ -16,10 +16,10 @@ const props = defineProps<{
 
         <span class="block mb-2">{{ props.blok.description }}</span>
 
-        <Button class="mb-1">
+        <UiButton class="mb-1">
             Test
-        </Button>
+        </UiButton>
 
-        <AnimatedBorder />
+        <UiAnimatedBorder />
     </div>
 </template>

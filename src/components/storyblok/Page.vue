@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { PageStoryblok } from '~/types';
-import { useComponent } from '~/utils/useComponent';
+import type { PageStoryblok } from '~/types'
+import { useComponent } from '~/utils/useComponent'
 
 const props = defineProps<{
-    blok: PageStoryblok;
-}>();
+    blok: PageStoryblok
+}>()
 
-const { filter } = useSections();
-const sections = filter(props.blok);
+const { filter } = useSections()
+const sections = filter(props.blok)
 </script>
 
 <template>

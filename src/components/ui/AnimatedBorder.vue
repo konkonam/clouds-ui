@@ -1,9 +1,10 @@
 <template>
-    <div class="absolute inset-0">
+    <div class="absolute inset-0 pointer-events-none">
         <div
             :class="[
                 'absolute top-[12px] left-1 h-4 w-0.5 bg-zinc-800',
                 'transition-all ease-in-out duration-150 delay-75',
+                'group-hover:top-[calc(100%-44px)] group-hover:h-8',
                 'group-hover:top-[calc(100%-44px)] group-hover:h-8',
             ]"
         />

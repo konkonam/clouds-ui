@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useElementBounding, useWindowScroll, useWindowSize } from '@vueuse/core'
+import { useElementBounding, useWindowSize } from '@vueuse/core'
 import type { SectionStoryblok } from '~/types'
 import type { Ref } from '#imports'
 import { useComponent } from '~/utils/useComponent'
@@ -34,17 +34,11 @@ onMounted(() => register(props.blok._uid, section as Ref<HTMLElement>))
             isVisible ? 'opacity-100' : 'opacity-0',
         ]"
     >
-        <span class="block">top: {{ topVisible }}</span>
-        <span class="block">bottom: {{ bottomVisible }}</span>
-        <span class="block">visible: {{ isVisible }}</span>
-
+        <span class="block">#{{ props.blok.name }}</span>
         <component
             :is="useComponent(item)"
             v-for="item in props.blok.content"
             :key="item._uid"
         />
-        <span class="block">top: {{ topVisible }}</span>
-        <span class="block">bottom: {{ bottomVisible }}</span>
-        <span class="block">visible: {{ isVisible }}</span>
     </div>
 </template>

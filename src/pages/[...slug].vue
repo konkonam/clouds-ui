@@ -7,6 +7,7 @@ definePageMeta({
         '/pages/:slug(.*)*',
     ],
 })
+
 const { fetchSingle } = useCms()
 
 const story = await fetchSingle()

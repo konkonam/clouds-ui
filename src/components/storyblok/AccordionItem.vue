@@ -1,37 +1,44 @@
 <script setup lang="ts">
-import {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-} from '@headlessui/vue'
 import type { AccordionItemStoryblok } from '~/types'
+import type { Ref } from '#imports'
 
 const props = defineProps<{
     blok: AccordionItemStoryblok
 }>()
+
+const openItem = inject<Ref<string>>('openItem') as Ref<string>
+const toggleItem = inject<(_uid: string) => void>('toggleItem') as (_uid: string) => void
 </script>
 
 <template>
-    <Disclosure v-slot="{ open }">
-        <DisclosureButton
-            class="group flex w-full mb-2 justify-between rounded-lg bg-zinc-800 p-1 text-left text-sm font-medium text-white focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75 transition-all"
-        >
-            <span class="w-full group-hover:bg-white group-hover:text-zinc-800 px-8 py-1.5 rounded-lg transition-all">
-                {{ props.blok.title }}
-            </span>
-        </DisclosureButton>
-        <transition
-            enter-active-class="transition duration-100 ease-out"
-            enter-from-class="h-0 transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-out"
-            leave-from-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0"
-        >
-            <DisclosurePanel
-                class="px-4 pb-2 pt-2 text-sm text-gray-500"
-                v-html="renderRichText(props.blok.content)"
+    <UiButton
+        class="group flex flex-col w-full mb-2 justify-between rounded-lg bg-zinc-800 p-1 text-left text-sm font-medium text-white focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75 transition-all"
+        @click="() => toggleItem(blok._uid)"
+    >
+        {{ props.blok.title }}
+
+        <template #after>
+            <span
+                :class="[
+                    'block h-1 rounded-lg bg-white group-hover:bg-zinc-800 transition-all',
+                    openItem === blok._uid ? 'w-6 ml-0' : 'w-1 ml-5',
+                ]"
             />
-        </transition>
-    </Disclosure>
+        </template>
+    </UiButton>
+
+    <transition
+        enter-active-class="transition duration-100 ease-out"
+        enter-from-class="transform scale-95 opacity-0"
+        enter-to-class="transform scale-100 opacity-100"
+        leave-active-class="transition duration-75 ease-out"
+        leave-from-class="transform scale-100 opacity-100"
+        leave-to-class="transform scale-95 opacity-0"
+    >
+        <div
+            v-if="openItem === blok._uid"
+            class="px-4 pb-2 pt-2 text-sm text-gray-700"
+            v-html="renderRichText(props.blok.content)"
+        />
+    </transition>
 </template>

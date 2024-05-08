@@ -1,13 +1,13 @@
-export * from './generated/storyblok';
+import type { ISbComponentType } from 'storyblok-js-client'
 
-export * from './navigation';
+export * from './generated/storyblok'
 
-import type { ISbComponentType } from "storyblok-js-client";
-export type SbBaseComponent = ISbComponentType<string>;
+export * from './navigation'
+export type SbBaseComponent = ISbComponentType<string>
 
 // third party
 export type {
-	ISbLink,
-	ISbStoryData,
-	ISbStoriesParams,
-} from "storyblok-js-client";
+    ISbLink,
+    ISbStoryData,
+    ISbStoriesParams,
+} from 'storyblok-js-client'
