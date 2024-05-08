@@ -113,6 +113,7 @@ export interface GridStoryblok {
     | FeatureStoryblok
     | GridStoryblok
     | HeroStoryblok
+    | ImageCardStoryblok
     | PageStoryblok
     | SectionStoryblok
     | TeaserStoryblok
@@ -143,11 +144,21 @@ export interface HeroStoryblok {
     | FeatureStoryblok
     | GridStoryblok
     | HeroStoryblok
+    | ImageCardStoryblok
     | PageStoryblok
     | SectionStoryblok
     | TeaserStoryblok
   )[];
   component: "hero";
+  _uid: string;
+  [k: string]: any;
+}
+
+export interface ImageCardStoryblok {
+  title: string;
+  subtitle?: string;
+  image: AssetStoryblok;
+  component: "image-card";
   _uid: string;
   [k: string]: any;
 }
@@ -162,6 +173,7 @@ export interface PageStoryblok {
     | FeatureStoryblok
     | GridStoryblok
     | HeroStoryblok
+    | ImageCardStoryblok
     | PageStoryblok
     | SectionStoryblok
     | TeaserStoryblok
@@ -181,6 +193,7 @@ export interface SectionStoryblok {
     | FeatureStoryblok
     | GridStoryblok
     | HeroStoryblok
+    | ImageCardStoryblok
     | PageStoryblok
     | SectionStoryblok
     | TeaserStoryblok

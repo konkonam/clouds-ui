@@ -10,10 +10,6 @@ onHeroMounted(() => {
     setTimeout(() => {
         hasHero.value = true
     }, 500)
-
-    setTimeout(() => {
-        showLogo.value = true
-    }, 1200)
 })
 </script>
 
@@ -34,10 +30,22 @@ onHeroMounted(() => {
             <span
                 :class="[
                     'bg-zinc-800 w-full ml-4 rounded-lg',
-                    'transition-all duration-500 ease',
-                    showLogo ? 'h-1 opacity-100' : 'h-0 opacity-0',
+                    'transition-all duration-500 delay-[500ms] ease',
+                    hasHero ? 'h-1 opacity-100' : 'h-0 opacity-0',
                 ]"
             />
+
+            <div class="flex flex-row gap-2 absolute right-0 top-full -mt-2">
+                <NuxtLink
+                    to="/"
+                    :class="[
+                        'transition-all duration-500 delay-[800ms] ease',
+                        hasHero ? 'opacity-100' : 'opacity-0',
+                    ]"
+                >
+                    github
+                </NuxtLink>
+            </div>
         </header>
     </teleport>
 </template>
