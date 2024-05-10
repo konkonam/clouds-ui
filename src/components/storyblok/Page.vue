@@ -12,10 +12,11 @@ const sections = filter(props.blok)
 
 <template>
     <div
-        class="grid"
+        :class="[
+            'grid',
+        ]"
         :style="!sections.length ? 'grid-template-columns: minmax(auto, 300px) 1fr;' : ''"
     >
-        <PageSidebar :sections="sections" />
         <div>
             <component
                 :is="useComponent(item)"

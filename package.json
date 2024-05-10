@@ -24,6 +24,7 @@
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia/nuxt": "^0.5.1",
     "@storyblok/vue": "^8.0.8",
+    "@vueuse/motion": "^2.1.0",
     "eslint": "^9.2.0",
     "nuxt": "^3.11.2",
     "tailwindcss-animate": "^1.0.7"

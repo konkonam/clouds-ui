@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useAnimate } from '@vueuse/core'
+import { useElementTransform } from '@vueuse/motion'
 
 interface Particle {
     id: number
@@ -11,11 +12,11 @@ interface Particle {
 }
 
 const container = ref<HTMLDivElement>()
-
+const { factor } = useParallax()
 const createParticles = (
     numParticles: number = 30,
-    minSize: number = 5,
-    maxSize: number = 10,
+    minSize: number = 10,
+    maxSize: number = 50,
 ) => {
     return Array.from({ length: numParticles }, (_, i) => ({
         id: i + 1,
@@ -38,15 +39,26 @@ const initAnimation = (el: HTMLSpanElement) => {
     play()
 }
 
+const transform = computed<string>(() => {
+    return `transform: translateY(${200 * factor.value}px, 0, 0)`
+})
+
 onMounted(() => {
     const children = container.value?.children ?? []
     Array.from(children as HTMLSpanElement[])
         .forEach((el: HTMLSpanElement) => initAnimation(el satisfies HTMLSpanElement))
+    const { transform } = useElementTransform(container)
+
+    watch(factor, (value) => {
+        transform.translateY = 200 * value
+    })
 })
 </script>
 
 <template>
-    <div class="absolute inset-0 pointer-events-none">
+    <div
+        class="fixed inset-0 pointer-events-none transition-all"
+    >
         <div
             ref="container"
             class="relative w-full h-full pointer-events-none"
