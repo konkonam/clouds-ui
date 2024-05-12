@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { AppLink } from '~/types';
+import type { AppLink } from '~/types'
 
 const props = defineProps<{
-    child: AppLink;
-}>();
+    child: AppLink
+}>()
 
-const closeAll = inject<() => void>('closeAll');
+const closeAll = inject<() => void>('closeAll')
 
 const handleClick = async () => {
-    if (closeAll) closeAll();
+    if (closeAll) closeAll()
 
-    await navigateTo(props.child.slug);
-};
+    await navigateTo(props.child.slug)
+}
 </script>
 
 <template>

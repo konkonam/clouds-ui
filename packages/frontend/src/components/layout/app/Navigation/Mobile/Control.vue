@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline';
-import type { Ref } from '#imports';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
+import type { Ref } from '#imports'
 
 const props = defineProps<{
-    variant: 'prev' | 'next';
-}>();
+    variant: 'prev' | 'next'
+}>()
 
-const activeItem = inject<Ref<number>>('activeItem') as Ref<number>;
-const lastItem = inject<number>('lastItem') as number;
+const activeItem = inject<Ref<number>>('activeItem') as Ref<number>
+const lastItem = inject<number>('lastItem') as number
 
-const isPrev = props.variant === 'prev';
+const isPrev = props.variant === 'prev'
 
 const onClick = () => {
-    if (isPrev && activeItem.value < 1) return;
-    else if (isPrev) activeItem.value = activeItem.value - 1;
-    else if (!isPrev && activeItem.value >= lastItem) return;
-    else activeItem.value = activeItem.value + 1;
-};
+    if (isPrev && activeItem.value < 1) return
+    else if (isPrev) activeItem.value = activeItem.value - 1
+    else if (!isPrev && activeItem.value >= lastItem) return
+    else activeItem.value = activeItem.value + 1
+}
 </script>
 
 <template>

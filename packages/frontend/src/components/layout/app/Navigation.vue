@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {
-    useElementBounding,
-    useWindowScroll,
-    useScrollLock,
-    useEventBus,
-    useElementHover,
-} from '@vueuse/core'
+import { useElementBounding, useElementHover, useEventBus, useScrollLock, useWindowScroll } from '@vueuse/core'
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 

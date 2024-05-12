@@ -1,55 +1,55 @@
 <script setup lang="ts">
-import type { Ref } from 'vue';
-import { useEventBus } from '@vueuse/core';
-import type { AppLink } from '~/types';
+import type { Ref } from 'vue'
+import { useEventBus } from '@vueuse/core'
+import type { AppLink } from '~/types'
 
 const props = defineProps<{
-    link: AppLink;
-    index: number;
-}>();
+    link: AppLink
+    index: number
+}>()
 
-const isSticky = inject<Ref<boolean>>('isSticky');
-const closeAll = inject<() => void>('closeAll');
-const lastOpenIndex = inject<Ref<number>>('lastOpenIndex');
-const activeItem = inject<Ref<number>>('activeItem') as Ref<number>;
-const direction = inject<Ref<'left' | 'right' | undefined>>('direction');
-const self = ref<HTMLElement>();
-const isChildrenOpen = ref<boolean>(false);
+const isSticky = inject<Ref<boolean>>('isSticky')
+const closeAll = inject<() => void>('closeAll')
+const lastOpenIndex = inject<Ref<number>>('lastOpenIndex')
+const activeItem = inject<Ref<number>>('activeItem') as Ref<number>
+const direction = inject<Ref<'left' | 'right' | undefined>>('direction')
+const self = ref<HTMLElement>()
+const isChildrenOpen = ref<boolean>(false)
 
-const hasChildren = computed(() => !!props.link.children?.length);
+const hasChildren = computed(() => !!props.link.children?.length)
 
-const { emit: closeItem } = useEventBus<string>('close-item');
-const { emit: updateHeight } = useEventBus<number>('update-height');
+const { emit: closeItem } = useEventBus<string>('close-item')
+const { emit: updateHeight } = useEventBus<number>('update-height')
 
 onMounted(() => {
-    if (!lastOpenIndex || !direction) return;
+    if (!lastOpenIndex || !direction) return
 
     watch(isChildrenOpen, (value) => {
-        if (!value) return;
+        if (!value) return
 
-        direction.value = props.index < lastOpenIndex.value ? 'left' : 'right';
-        lastOpenIndex.value = props.index;
-    });
+        direction.value = props.index < lastOpenIndex.value ? 'left' : 'right'
+        lastOpenIndex.value = props.index
+    })
 
     watch(activeItem, (value) => {
-        if (!self.value) return;
+        if (!self.value) return
 
         if (value === props.index) {
-            self.value.style.display = 'block';
-            self.value.style.order = '-1';
+            self.value.style.display = 'block'
+            self.value.style.order = '-1'
         }
         else {
-            self.value.style.display = 'none';
-            self.value.style.order = '';
+            self.value.style.display = 'none'
+            self.value.style.order = ''
         }
 
-        closeItem('');
-        updateHeight(0);
-    });
-});
+        closeItem('')
+        updateHeight(0)
+    })
+})
 
-provide('isChildrenOpen', isChildrenOpen);
-provide('currentIndex', props.index);
+provide('isChildrenOpen', isChildrenOpen)
+provide('currentIndex', props.index)
 </script>
 
 <template>

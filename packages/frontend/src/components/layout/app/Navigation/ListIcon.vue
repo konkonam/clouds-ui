@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Ref } from '#imports';
+import type { Ref } from '#imports'
 
-const isSticky = inject<Ref<boolean>>('isSticky');
-const isChildrenOpen = inject<Ref<boolean>>('isChildrenOpen');
+const isSticky = inject<Ref<boolean>>('isSticky')
+const isChildrenOpen = inject<Ref<boolean>>('isChildrenOpen')
 </script>
 
 <template>
