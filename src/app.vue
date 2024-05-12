@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import '@fontsource-variable/sono'
+import '@fontsource-variable/nunito-sans'
 </script>
 
 <template>

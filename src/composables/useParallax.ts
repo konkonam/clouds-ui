@@ -23,8 +23,6 @@ export const useParallax = (...options: ParallaxOptions[]) => {
                 const procent = from / (document?.body.offsetHeight - windowHeight.value) * 100
                 factor.value = procent * 0.01
 
-                console.log(procent)
-                console.log(factor.value)
                 option.target.value.style.transform = `translateY(${option.by * factor.value}px, 0, 0)`
             })
         })
