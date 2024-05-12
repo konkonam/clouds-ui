@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
 import { useComponent } from '~/utils/useComponent'
 
 definePageMeta({
@@ -11,9 +10,6 @@ definePageMeta({
 const { fetchSingle } = useCms()
 
 const story = await fetchSingle()
-const windowScroll = useWindowScroll()
-
-provide('windowScroll', windowScroll)
 </script>
 
 <template>

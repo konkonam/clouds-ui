@@ -5,7 +5,7 @@
 <template>
     <div class="relative flex flex-col min-h-screen px-4">
         <AppHeader />
-        <AppNavigation />
         <slot />
+        <AppFooter />
     </div>
 </template>

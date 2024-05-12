@@ -18,9 +18,6 @@
 
 				packages.default = pkgs.stdenv.mkDerivation {
 					name = "cms-base";
-					src = builtins.filterSource
-                      (path: type: type != "directory" || baseNameOf path != ".svn")
-                      ./src;
 					buildInputs = sharedInputs;
 					shellHook = ''
 						if [ ! -f ${sslCertFile} ] || [ ! -f ${sslKeyFile} ]; then

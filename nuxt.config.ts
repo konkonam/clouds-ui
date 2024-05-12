@@ -34,11 +34,6 @@ export default defineNuxtConfig({
                 global: true,
             },
             {
-                path: '~/components/ui',
-                pathPrefix: false,
-                prefix: 'ui',
-            },
-            {
                 path: '~/components',
                 pathPrefix: false,
             },
@@ -48,7 +43,15 @@ export default defineNuxtConfig({
         presets: [
             {
                 from: '@storyblok/vue',
-                imports: ['StoryblokVue', 'apiPlugin', 'useStoryblokApi', 'useStoryblok', 'useStoryblokBridge', 'RichTextSchema', 'renderRichText'],
+                imports: [
+                    'StoryblokVue',
+                    'apiPlugin',
+                    'useStoryblok',
+                    'useStoryblokApi',
+                    'useStoryblokBridge',
+                    'RichTextSchema',
+                    'renderRichText',
+                ],
             },
         ],
     },
